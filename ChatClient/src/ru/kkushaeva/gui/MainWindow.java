@@ -9,11 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainWindow extends JFrame {
     private JLabel lbl;
@@ -22,8 +18,8 @@ public class MainWindow extends JFrame {
     private JTextArea ta;
     private JScrollPane sp;
     private Client client;
-    public MainWindow(){
-
+    public MainWindow(Client client){
+        this.client = client;
         setSize(600,450);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         lbl = new JLabel("");
@@ -66,7 +62,6 @@ public class MainWindow extends JFrame {
         );
         //endregion
         try {
-            client = new Client("localhost", 5003);
             client.start();
         } catch (IOException e) {
             getMessage("Ошибка: " + e.getMessage());
@@ -102,11 +97,12 @@ public class MainWindow extends JFrame {
         client.addListener(new ChatListener() {
             @Override
             public void chatAvailiable(ChatEvent e) {
-                ta.append(e.getMessage1());
+                getMessage(e.getMessage1());
             }
         });
     }
-    public void getMessage(String msg) {
+    public void getMessage(String msg)
+    {
         ta.append(msg);
     }
     public void sendMessage(String msg)

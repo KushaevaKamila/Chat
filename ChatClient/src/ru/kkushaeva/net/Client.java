@@ -80,8 +80,8 @@ public class Client {
     {
         listeners.add(a);
     }
-    public void fireEvent( ChatEvent e){
-        for(int i =0; i< listeners.size(); i++)
+    public void fireEvent(ChatEvent e){
+        for(int i = 0; i < listeners.size(); i++)
         {
             listeners.get(i).chatAvailiable(e);
         }

@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        MainWindow a = new MainWindow();
+        MainWindow a = new MainWindow(new Client("localhost", 5003));
         a.setVisible(true);
     }
 }
