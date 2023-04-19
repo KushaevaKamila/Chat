@@ -7,6 +7,8 @@ import ru.kkushaeva.net.Client;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -69,13 +71,33 @@ public class MainWindow extends JFrame {
         } catch (IOException e) {
             getMessage("Ошибка: " + e.getMessage());
         }
+        tf.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    sendMessage(tf.getText());
+                    tf.setText("");
+                }
+            }
+        });
         btn.addActionListener(new ActionListener() {
-                                  @Override
-                                  public void actionPerformed(ActionEvent e) {
-                                      sendMessage(tf.getText());
-                                      tf.setText("");
-                                  }
-                              }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sendMessage(tf.getText());
+                tf.setText("");
+            }
+        }
         );
         client.addListener(new ChatListener() {
             @Override
